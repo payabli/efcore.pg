@@ -841,7 +841,7 @@ public class NpgsqlTypeMappingSource : RelationalTypeMappingSource
         EnumDefinition? enumDefinition;
         if (storeType is null)
         {
-            enumDefinition = _enumDefinitions.SingleOrDefault(m => m.ClrType == clrType);
+            enumDefinition = _enumDefinitions.FirstOrDefault(m => m.ClrType == clrType);
 
             if (enumDefinition is null)
             {
@@ -860,8 +860,8 @@ public class NpgsqlTypeMappingSource : RelationalTypeMappingSource
             ParseStoreTypeName(storeType, out name, out schema, out var size, out var precision, out var scale);
 
             enumDefinition = schema is null
-                ? _enumDefinitions.SingleOrDefault(m => m.StoreTypeName == name)
-                : _enumDefinitions.SingleOrDefault(m => m.StoreTypeName == name && m.StoreTypeSchema == schema);
+                ? _enumDefinitions.FirstOrDefault(m => m.StoreTypeName == name)
+                : _enumDefinitions.FirstOrDefault(m => m.StoreTypeName == name && m.StoreTypeSchema == schema);
 
             if (enumDefinition is null)
             {
